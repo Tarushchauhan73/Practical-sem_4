@@ -1,192 +1,34 @@
-#include <stdio.h>
+Experiment no - 01 Implementation of Binary search algorithm using Divide & Conquer method.
 
-void strassenMatrixMultiplication(int n, int A[][n], int B[][n], int C[][n]) {
-    if (n == 1) {
-        C[0][0] = A[0][0] * B[0][0];
-        return;
-    }
+Title: Implementation of Binary search algorithm using Divide & Conquer method. Theory/Description:
 
-    int i, j;
-    int newSize = n / 2;
+Binary search:- can be performed on a sorted array. In this approach, the index of an element x is determined if the element belongs to the list of elements. If the array is unsorted, linear search is used to determine the position.
+In this algorithm, we want to find whether element x belongs to a set of numbers stored in an array numbers[]. Where l and r represent the left and right index of a sub-array in which searching operation should be performed.
+Algorithm:
 
-    int A11[newSize][newSize], A12[newSize][newSize], A21[newSize][newSize], A22[newSize][newSize];
-    int B11[newSize][newSize], B12[newSize][newSize], B21[newSize][newSize], B22[newSize][newSize];
-    int C11[newSize][newSize], C12[newSize][newSize], C21[newSize][newSize], C22[newSize][newSize];
-    int P1[newSize][newSize], P2[newSize][newSize], P3[newSize][newSize], P4[newSize][newSize], P5[newSize][newSize], P6[newSize][newSize], P7[newSize][newSize];
+Binary-Search (numbers[], x, l, r)
+if l = r then
+return l
+else
+m := ⌊(l + r) / 2⌋
+if x ≤ numbers[m] then
+return Binary-Search(numbers[], x, l, m)
+else
+return Binary-Search(numbers[], x, m+1, r)
 
-    // Divide matrices A and B into 4 submatrices
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            A11[i][j] = A[i][j];
-            A12[i][j] = A[i][j + newSize];
-            A21[i][j] = A[i + newSize][j];
-            A22[i][j] = A[i + newSize][j + newSize];
+Example:
 
-            B11[i][j] = B[i][j];
-            B12[i][j] = B[i][j + newSize];
-            B21[i][j] = B[i + newSize][j];
-            B22[i][j] = B[i + newSize][j + newSize];
-        }
-    }
+In this example, we are going to search element 63. 
+Screenshot 2024-03-02 231603
+https://private-user-images.githubusercontent.com/123314058/309491255-97d947b9-7664-493f-991e-68baedae1a4c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDk3MTkyNjIsIm5iZiI6MTcwOTcxODk2MiwicGF0aCI6Ii8xMjMzMTQwNTgvMzA5NDkxMjU1LTk3ZDk0N2I5LTc2NjQtNDkzZi05OTFlLTY4YmFlZGFlMWE0Yy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMzA2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDMwNlQwOTU2MDJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yY2JjNTBlODJlMzFhOGVkNTY0NDBlMzM0YWIyNjQzZDY1MjQ1YjA5ZmUzY2VhMTMyMzQzZjRlMjgxZjczM2VkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.Pv0Kp9yisuxIWq1cU_dA2H7dr7K-VeSscaMvfanVWSQ![image](https://github.com/Tarushchauhan73/Practical-sem_4/assets/156651501/de4b2154-3d57-4d34-9e73-08d571b02027)
 
-    // Calculate the 7 products recursively
-    strassenMatrixMultiplication(newSize, A11, B11, P1);
-    strassenMatrixMultiplication(newSize, A12, B21, P2);
-    strassenMatrixMultiplication(newSize, A11, B12, P3);
-    strassenMatrixMultiplication(newSize, A12, B22, P4);
-    strassenMatrixMultiplication(newSize, A21, B11, P5);
-    strassenMatrixMultiplication(newSize, A22, B21, P6);
-    strassenMatrixMultiplication(newSize, A21, B12, P7);
+Conclusion( must include analysis of program):
 
-    // Calculate the resulting submatrices
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            C11[i][j] = P1[i][j] + P2[i][j];
-            C12[i][j] = P3[i][j] + P4[i][j];
-            C21[i][j] = P5[i][j] + P6[i][j];
-            C22[i][j] = P7[i][j] + P1[i][j] - P3[i][j] + P5[i][j];
-        }
-    }
+Analysis: Linear search runs in O(n) time. Whereas binary search produces the result in O(logn) time. Let T(n) be the number of comparisons in worst-case in an array of nelements.
+Hence,T(n)={0.....................fn=1 T(n/2)+1 ........otherwise Using this recurrence relation T(n)=(logn).
+Therefore, binary search uses O(logn)time.
+VIVA-VOCE QUESTIONS:
 
-    // Combine the resulting submatrices into the final matrix C
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            C[i][j] = C11[i][j];
-            C[i][j + newSize] = C12[i][j];
-            C[i + newSize][j] = C21[i][j];
-            C[i + newSize][j + newSize] = C22[i][j];
-        }
-    }
-}
-
-int main() {
-    int n, i, j;
-
-    printf("Enter the size of the matrices: ");
-    scanf("%d", &n);
-
-    int A[n][n], B[n][n], C[n][n];
-
-    printf("Enter the elements of matrix A:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            scanf("%d", &A[i][j]);
-        }
-    }
-
-    printf("Enter the elements of matrix B:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            scanf("%d", &B[i][j]);
-        }
-    }
-
-    strassenMatrixMultiplication(n, A, B, C);
-
-    printf("The result of matrix multiplication is:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            printf("%d ", C[i][j]);
-        }
-        printf("\n");
-    }
-
-    return 0;
-}
-
-#include <stdio.h>
-
-void strassenMatrixMultiplication(int n, int A[][n], int B[][n], int C[][n]) {
-    if (n == 1) {
-        C[0][0] = A[0][0] * B[0][0];
-        return;
-    }
-
-    int i, j;
-    int newSize = n / 2;
-
-    int A11[newSize][newSize], A12[newSize][newSize], A21[newSize][newSize], A22[newSize][newSize];
-    int B11[newSize][newSize], B12[newSize][newSize], B21[newSize][newSize], B22[newSize][newSize];
-    int C11[newSize][newSize], C12[newSize][newSize], C21[newSize][newSize], C22[newSize][newSize];
-    int P1[newSize][newSize], P2[newSize][newSize], P3[newSize][newSize], P4[newSize][newSize], P5[newSize][newSize], P6[newSize][newSize], P7[newSize][newSize];
-
-    // Divide matrices A and B into 4 submatrices
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            A11[i][j] = A[i][j];
-            A12[i][j] = A[i][j + newSize];
-            A21[i][j] = A[i + newSize][j];
-            A22[i][j] = A[i + newSize][j + newSize];
-
-            B11[i][j] = B[i][j];
-            B12[i][j] = B[i][j + newSize];
-            B21[i][j] = B[i + newSize][j];
-            B22[i][j] = B[i + newSize][j + newSize];
-        }
-    }
-
-    // Calculate the 7 products recursively
-    strassenMatrixMultiplication(newSize, A11, B11, P1);
-    strassenMatrixMultiplication(newSize, A12, B21, P2);
-    strassenMatrixMultiplication(newSize, A11, B12, P3);
-    strassenMatrixMultiplication(newSize, A12, B22, P4);
-    strassenMatrixMultiplication(newSize, A21, B11, P5);
-    strassenMatrixMultiplication(newSize, A22, B21, P6);
-    strassenMatrixMultiplication(newSize, A21, B12, P7);
-
-    // Calculate the resulting submatrices
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            C11[i][j] = P1[i][j] + P2[i][j];
-            C12[i][j] = P3[i][j] + P4[i][j];
-            C21[i][j] = P5[i][j] + P6[i][j];
-            C22[i][j] = P7[i][j] + P1[i][j] - P3[i][j] + P5[i][j];
-        }
-    }
-
-    // Combine the resulting submatrices into the final matrix C
-    for (i = 0; i < newSize; i++) {
-        for (j = 0; j < newSize; j++) {
-            C[i][j] = C11[i][j];
-            C[i][j + newSize] = C12[i][j];
-            C[i + newSize][j] = C21[i][j];
-            C[i + newSize][j + newSize] = C22[i][j];
-        }
-    }
-}
-
-int main() {
-    int n, i, j;
-
-    printf("Enter the size of the matrices: ");
-    scanf("%d", &n);
-
-    int A[n][n], B[n][n], C[n][n];
-
-    printf("Enter the elements of matrix A:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            scanf("%d", &A[i][j]);
-        }
-    }
-
-    printf("Enter the elements of matrix B:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            scanf("%d", &B[i][j]);
-        }
-    }
-
-    strassenMatrixMultiplication(n, A, B, C);
-
-    printf("The result of matrix multiplication is:\n");
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            printf("%d ", C[i][j]);
-        }
-        printf("\n");
-    }
-
-    return 0;
-}
-
+Differentiate between recursive approach than an iterative approach?
+What is the worst case complexity of binary search using recursion?
+What are the applications of binary search?

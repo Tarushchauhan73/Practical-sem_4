@@ -1,34 +1,13 @@
-Experiment no - 01 Implementation of Binary search algorithm using Divide & Conquer method.
+Experiment no - 03 Implementation of Strassen’s Matrix multiplication.
 
-Title: Implementation of Binary search algorithm using Divide & Conquer method. Theory/Description:
+Title: Implementation of Strassen’s Matrix multiplication.
+Theory/Description: using Strassen’s Matrix multiplication algorithm, the time consumption can be improved a little bit. Strassen’s Matrix multiplication can be performed only on square matriceswhere n is a power of 2. Order of both of the matrices are n × n. Divide X, Y and Z into four (n/2)×(n/2) matrices as represented below −
+Z=[IKJL]Z=[IJKL] X=[ACBD]X=[ABCD] and Y=[EGFH]Y=[EFGH]
 
-Binary search:- can be performed on a sorted array. In this approach, the index of an element x is determined if the element belongs to the list of elements. If the array is unsorted, linear search is used to determine the position.
-In this algorithm, we want to find whether element x belongs to a set of numbers stored in an array numbers[]. Where l and r represent the left and right index of a sub-array in which searching operation should be performed.
-Algorithm:
+Using Strassen’s Algorithm compute the following −
+Screenshot 2024-03-06 105816
+Analysis:
 
-Binary-Search (numbers[], x, l, r)
-if l = r then
-return l
-else
-m := ⌊(l + r) / 2⌋
-if x ≤ numbers[m] then
-return Binary-Search(numbers[], x, l, m)
-else
-return Binary-Search(numbers[], x, m+1, r)
-
-Example:
-
-In this example, we are going to search element 63. 
-Screenshot 2024-03-02 231603
-[image](https://github.com/Tarushchauhan73/Practical-sem_4/assets/156651501/de4b2154-3d57-4d34-9e73-08d571b02027)
-
-Conclusion( must include analysis of program):
-
-Analysis: Linear search runs in O(n) time. Whereas binary search produces the result in O(logn) time. Let T(n) be the number of comparisons in worst-case in an array of nelements.
-Hence,T(n)={0.....................fn=1 T(n/2)+1 ........otherwise Using this recurrence relation T(n)=(logn).
-Therefore, binary search uses O(logn)time.
-VIVA-VOCE QUESTIONS:
-
-Differentiate between recursive approach than an iterative approach?
-What is the worst case complexity of binary search using recursion?
-What are the applications of binary search?
+T(n)={c ...............fn=1
+7xT(n2)+dxn2otherwise,
+where c and d are constants Using this recurrence relation, we get T(n)=O(nlog7)T(n)=O(nlog7) Hence, the complexity of Strassen’s matrix multiplication algorithm is O(nlog7)O(nlog7). C code of two 2 by 2 matrix multiplication using Strassen's algorithm

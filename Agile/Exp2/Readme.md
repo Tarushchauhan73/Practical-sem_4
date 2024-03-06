@@ -2,8 +2,11 @@
  What are the various functions involved in product management ?
 Product management is a multifaceted role encompassing various functions, but here are five key ones:
 1. Idea Generation & Validation:
+
 ● Identifying customer needs and market opportunities.
+
 ● Brainstorming and refining product concepts.
+
 ● Conducting user research and gathering feedback to validate ideas.
 2. Product Development & Planning:
 ● Defining product requirements, features, and functionalities.
